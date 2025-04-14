@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--? ============== Main Style ============== -->
+     <link rel="stylesheet" href="style.css">
+    <title>Hangman Game</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="game-info">
+                <div class="game-name">Hangman</div>
+                <div class="category">
+                    Word From : <span id="category"></span>
+                </div>
+                <div class="newChallenge">New Challenge</div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="hangman-drow">
+                    <div class="the-drow">
+                        <div class="the-stand"></div>
+                        <div class="the-hang"></div>
+                        <div class="the-rope"></div>
+                        <div class="the-man">
+                            <header class="head"></header>
+                            <main class="body"></main>
+                            <div class="hands"></div>
+                            <div class="legs"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="letters"></div>
+            </div>
+            <hr>
+            <div class="letters-guess"></div>
+        </div>
+    </main>
+    <!--? ============== Main JavaScript ============== -->
+    <script src="main.js"></script>
+</body>
+</html>

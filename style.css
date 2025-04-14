@@ -1,0 +1,333 @@
+:root {
+    /* Colors */
+    --color-primary: #DC3545;
+    --color-secondary: #0099CC
+    ;
+    --color-bg: #f2f2f2;
+    --color-white: #fff;
+    --color-dark: #222;
+    --color-light: #f8f8f8;
+    --color-border: #ddd;
+    --color-text: #333;
+  
+    /* Font */
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    /* Spacing */
+    --space-sm: 10px;
+    --space-md: 20px;
+    --space-lg: 40px;
+  
+    /* Radius & Shadow */
+    --radius: 12px;
+    --shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Reset and Base Styles */
+  *,
+  *::before,
+  *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Container */
+  .container {
+    width: 90%;
+    margin: var(--space-md) auto;
+  }
+  
+  /* Game Info */
+  .game-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .game-info .game-name {
+    font-size: 31px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  
+  .game-info .category {
+    font-size: 20px;
+  }
+  
+  .game-info .category span {
+    text-transform: capitalize;
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
+  
+  .game-info .newChallenge{
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  hr {
+    border: 1px solid var(--color-border);
+    margin: var(--space-md) 0;
+  }
+  
+  /* Game Layout */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+  
+  /* Hangman Drawing */
+  .hangman-drow {
+    flex: 1 1 300px;
+    background-color: var(--color-light);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hangman-drow .the-drow {
+    width: 60px;
+    height: 350px;
+    border-bottom: 4px solid var(--color-secondary);
+    position: relative;
+  }
+  
+  /* Stand and Hang Structure */
+  .the-stand::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background-color: var(--color-secondary);
+    left: 50%;
+    margin-left: -2px;
+  }
+  
+  .the-hang::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 6px;
+    background-color: var(--color-secondary);
+    left: 30px;
+    top: 15px;
+  }
+  
+  .the-hang::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 30px;
+    background-color: var(--color-secondary);
+    left: 130px;
+    top: 15px;
+  }
+  
+  .the-rope {
+    width: 70px;
+    height: 70px;
+    border: 4px dashed var(--color-secondary);
+    border-radius: 50%;
+    position: absolute;
+    left: 95px;
+    top: 44px;
+  }
+  
+  /* The Man Drawing */
+  .the-man .head {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--color-dark);
+    border-radius: 50%;
+    position: absolute;
+    left: 105px;
+    top: 54px;
+  }
+  
+  .the-man .body {
+    background-color: var(--color-dark);
+    width: 4px;
+    height: 110px;
+    position: absolute;
+    top: 102px;
+    left: 130px;
+  }
+  
+  .the-man .hands::before,
+  .the-man .hands::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: var(--color-dark);
+    top: 135px;
+  }
+  
+  .the-man .hands::before {
+    left: 85px;
+    transform: rotate(30deg);
+  }
+  
+  .the-man .hands::after {
+    left: 130px;
+    transform: rotate(-30deg);
+  }
+  
+  .the-man .legs::before,
+  .the-man .legs::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: var(--color-dark);
+    bottom: 120px;
+  }
+  
+  .the-man .legs::before {
+    left: 85px;
+    transform: rotate(-30deg);
+  }
+  
+  .the-man .legs::after {
+    left: 130px;
+    transform: rotate(30deg);
+  }
+  
+  /* Letters Section */
+  .letters {
+    flex: 2 1 400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-light);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    min-height: 200px;
+  }
+  
+  /* Guessed Letters */
+  .letters-guess {
+    margin-top: var(--space-md);
+    min-height: 50px;
+    font-size: 1.375rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 5px;
+  }
+
+  .letters{
+    flex: 2;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .letters .letter-box{
+    width: 3.125rem;
+    height: 3.125rem;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-block: 10px;
+  }
+  
+  .letters-guess{
+    margin: 10px auto;
+    background-color: var(--color-bg);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 104px;
+    border-radius: var(--radius);
+  }
+
+  .letters-guess span{
+    width: 3.75rem;
+    height: 3.75rem;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border-radius: 50%;
+    font-size: 24px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 60px;
+    text-transform: uppercase;
+  }
+
+  .letters-guess span.with-space{
+    background: none;
+    position: relative;
+  }
+
+  
+  .letters-guess span.with-space::before{
+    content: '';
+    width: 20px;
+    height: 4px;
+    background-color: var(--color-secondary);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .letters .letter-box.cliked{
+    background-color: var(--color-dark);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .game-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+  
+    .row {
+      flex-direction: column;
+    }
+  
+    .letters {
+      font-size: 18px;
+      gap: 8px;
+    }
+  
+    .hangman-drow {
+      height: auto;
+    }
+  
+    .letters-guess {
+      font-size: 18px;
+    }
+  }
+  
