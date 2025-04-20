@@ -64,20 +64,99 @@ lettersAndSpace.forEach((letter) => {
   lettersGuessContainer.appendChild(emptySpan);
 });
 
-// Handle Cliking on Letters
+let guessSpans = document.querySelectorAll(".letters-guess span");
+
+// set wrong guesses
+let wrongGuesses = 0;
+
+let theDrow = document.querySelector(".hangman-drow");
+
+// Handle Clicking on Letters
 document.addEventListener("click", (e) => {
+  let theStatus = false;
+
   if (e.target.className === "letter-box") {
     e.target.classList.add("cliked");
 
-    // get clicked letter
     let theClickedLetter = e.target.innerHTML.toLowerCase();
+    let theChosenWord = Array.from(randomValue.toLowerCase());
 
-    let theChosenWord = Array.from(randomValue.toLowerCase())
-    
-    theChosenWord.forEach((wordLetter, index) => {
+    theChosenWord.forEach((wordLetter, wordIndex) => {
       if (theClickedLetter == wordLetter) {
-        console.log(`Found at index number ${index}`);
+        theStatus = true;
+
+        guessSpans.forEach((span, spanIndex) => {
+          if (spanIndex == wordIndex) {
+            span.innerHTML = theClickedLetter;
+          }
+        });
       }
     });
+
+    if (!theStatus) {
+      wrongGuesses++;
+      theDrow.classList.add(`wrong-${wrongGuesses}`);
+      document.getElementById("wrong").play();
+
+      if (wrongGuesses === 8) {
+        endGame(false);
+        lettersContainer.classList.add("finished");
+      }
+    } else {
+      document.getElementById("correct").play();
+      checkWin(); // ✅ check win after correct guess
+    }
   }
 });
+
+// ✅ Check Win Function
+function checkWin() {
+  let allFilled = true;
+
+  guessSpans.forEach((span, index) => {
+    if (
+      span.innerHTML === "" &&
+      lettersAndSpace[index] !== " " // ignore spaces
+    ) {
+      allFilled = false;
+    }
+  });
+
+  if (allFilled) {
+    endGame(true); // ✅ user wins
+    lettersContainer.classList.add("finished");
+  }
+}
+
+// ✅ Updated End Game
+function endGame(isWin) {
+  if (isWin) {
+    Swal.fire({
+      icon: "success",
+      title: "Congratulations!",
+      text: `You guessed it right! The word was "${randomValue}".`,
+      confirmButtonText: "OK",
+    }).then(() => {
+      location.reload(); 
+    });
+    
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: `Game Over! The word was "${randomValue}".`,
+      confirmButtonText: "OK",
+    }).then(() => {
+      location.reload(); 
+    });
+    
+  }
+}
+
+
+
+
+const newChallenge = document.querySelector('.newChallenge')
+newChallenge.addEventListener('click', function(){
+    window.location.reload()
+})
